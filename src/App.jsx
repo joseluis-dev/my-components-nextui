@@ -7,6 +7,7 @@ import Header from '#components/Header/Header'
 import { UITablePage } from '#pages/Tables/UITablePage'
 import { SUITablePage } from '#pages/Tables/SUITablePage'
 import { UIDatePickerPage } from '#pages/UIDatePickerPage/UIDatePickerPage'
+import { SUITableProvider } from '#components/SUITable/SUITableProvider'
 
 const App = () => {
   const [show, setShow] = useState(false)
@@ -27,7 +28,9 @@ const App = () => {
     <main className='main-container'>
       <Route path='/search-select' component={Selectors}/>
       <Route path='/uitable' component={UITablePage}/>
-      <Route path='/suitable' component={SUITablePage}/>
+      <SUITableProvider>
+        <Route path='/suitable' component={SUITablePage}/>
+      </SUITableProvider>
       <Route path='/uidatepicker' component={UIDatePickerPage}/>
     </main>
     </>

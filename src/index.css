@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+pre {
+  @apply rounded-md w-full;
+}
 /* width */
 ::-webkit-scrollbar { 
   width: 5px;

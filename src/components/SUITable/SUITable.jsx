@@ -1,19 +1,11 @@
 import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@nextui-org/react'
 import { useCallback, useMemo, useState } from 'react'
-import { defaultColumns, defaultData } from '#constants/defaultCustomTableItems'
 import { bottomContentAdon, topContentAdon } from './tableAdons'
+import { useSUITableContext } from '#context/SUITableContext'
 
-export const SUITable = ({
-  columns = defaultColumns,
-  data = defaultData,
-  pages = Math.ceil(defaultData.length / 5),
-  totalItems,
-  page,
-  setPage,
-  setRowsPerPage,
-  filterValue,
-  setFilterValue
-}) => {
+export const SUITable = () => {
+  const { data, pages, totalItems, page, setPage, setRowsPerPage, filterValue, setFilterValue, columns } = useSUITableContext()
+
   const INITIAL_VISIBLE_COLUMNS = columns.length > 0 ? columns.filter(column => column.visible).map(columnFiltered => columnFiltered.uid) : []
   const [visibleColumns, setVisibleColumns] = useState(new Set(INITIAL_VISIBLE_COLUMNS))
   const [sortDescriptor, setSortDescriptor] = useState({
@@ -110,12 +102,9 @@ export const SUITable = ({
       classNames={{
         wrapper: 'max-h-[382px]'
       }}
-      // selectedKeys={selectedKeys}
-      // selectionMode="multiple"
       sortDescriptor={sortDescriptor}
       topContent={topContent}
       topContentPlacement="outside"
-      // onSelectionChange={setSelectedKeys}
       onSortChange={setSortDescriptor}
     >
       <TableHeader columns={headerColumns}>
